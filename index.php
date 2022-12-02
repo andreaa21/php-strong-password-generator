@@ -17,6 +17,10 @@ Dare all’utente anche la possibilità di permettere o meno la ripetizione di c
 
 
 
+$psw_length = $_GET['length'];
+var_dump($psw_length);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -26,10 +30,42 @@ Dare all’utente anche la possibilità di permettere o meno la ripetizione di c
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css' integrity='sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==' crossorigin='anonymous' />
+
     <title>Strong Password Generator</title>
 </head>
 
 <body>
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col text-center">
+                <h1>
+                    Strong Password Generator
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex justify-content-center p-5">
+                <div class="text me-5 d-flex align-items-center h-100">
+                    <p>
+                        lunghezza Password:
+                    </p>
+                </div>
+                <form class="d-flex" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="GET">
+                    <input type="number" class="form-control" name="length">
+                    <div class="ms-3">
+                        <button class="btn btn-primary" type="submit">
+                            invia
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
 
 </body>
 
