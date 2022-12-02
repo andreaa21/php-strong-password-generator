@@ -16,10 +16,21 @@ Dare all’utente anche la possibilità di permettere o meno la ripetizione di c
 */
 
 
-
 $psw_length = $_GET['length'];
-var_dump($psw_length);
 
+function getPassword($psw_length)
+{
+    $chars = 'abcdefghijklmnopqrstuvxwyzABCDEFGHJKLMNOPQRSTUVXWYZ0123456789(!?&%$<>^+-*/()[]{}@#_=))';
+    $psw = '';
+
+    for ($i = 0; $i < $psw_length; $i++) {
+
+        $randomChar = rand(0, strlen($chars) - 1);
+        $psw .= substr($chars, $randomChar, 1);
+    }
+
+    return $psw;
+}
 
 ?>
 
@@ -38,22 +49,27 @@ var_dump($psw_length);
 
 <body>
 
+
+
     <div class="container">
         <div class="row mt-5">
             <div class="col text-center">
                 <h1>
                     Strong Password Generator
                 </h1>
+                <h3>
+                    Genera una password sicura
+                </h3>
             </div>
         </div>
         <div class="row">
             <div class="col d-flex justify-content-center p-5">
                 <div class="text me-5 d-flex align-items-center h-100">
-                    <p>
+                    <span>
                         lunghezza Password:
-                    </p>
+                    </span>
                 </div>
-                <form class="d-flex" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="GET">
+                <form class="d-flex" action="index.php" method="GET">
                     <input type="number" class="form-control" name="length">
                     <div class="ms-3">
                         <button class="btn btn-primary" type="submit">
@@ -61,6 +77,23 @@ var_dump($psw_length);
                         </button>
                     </div>
                 </form>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <div class="text me-3">
+                    <span>
+                        la tua password è:
+                    </span>
+                </div>
+                <?php
+                if ($psw_length > 7 && $psw_length < 33) :
+                    echo getPassword($psw_length);
+                else :
+                    echo 'La lunghezza della tua password deve essere dagli 8 ai 32 caratteri';
+                endif;
+                ?>
 
             </div>
         </div>
