@@ -15,15 +15,18 @@ Dare all’utente anche la possibilità di permettere o meno la ripetizione di c
 
 */
 
+if (isset($_GET['length'])) {
+    $psw_length = $_GET['length'];
+} else {
+    $psw_length = null;
+}
 
-$psw_length = $_GET['length'];
 
-function getPassword($psw_length)
+function getPassword($length)
 {
     $chars = 'abcdefghijklmnopqrstuvxwyzABCDEFGHJKLMNOPQRSTUVXWYZ0123456789(!?&%$<>^+-*/()[]{}@#_=))';
     $psw = '';
-
-    for ($i = 0; $i < $psw_length; $i++) {
+    for ($i = 0; $i < $length; $i++) {
 
         $randomChar = rand(0, strlen($chars) - 1);
         $psw .= substr($chars, $randomChar, 1);
@@ -32,9 +35,6 @@ function getPassword($psw_length)
     return $psw;
 }
 
-if (isset($_GET['length'])) {
-    $password = getPassword($_GET['length']);
-}
 
 ?>
 
@@ -73,7 +73,7 @@ if (isset($_GET['length'])) {
                         lunghezza Password:
                     </span>
                 </div>
-                <form class="d-flex" action="index.php" method="GET">
+                <form class="d-flex" action="./index.php" method="GET">
                     <input type="number" class="form-control" name="length">
                     <div class="ms-3">
                         <button class="btn btn-primary" type="submit">
@@ -88,11 +88,7 @@ if (isset($_GET['length'])) {
             <div class="col d-flex">
 
                 <?php
-                if ($psw_length > 7 && $psw_length < 33) :
-                    echo "<span>la tua password è: $password</span>";
-                else :
-                    echo 'La lunghezza della tua password deve essere dagli 8 ai 32 caratteri';
-                endif;
+                echo getPassword($psw_length);
                 ?>
 
             </div>
