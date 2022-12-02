@@ -32,6 +32,10 @@ function getPassword($psw_length)
     return $psw;
 }
 
+if (isset($_GET['length'])) {
+    $password = getPassword($_GET['length']);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -81,15 +85,11 @@ function getPassword($psw_length)
             </div>
         </div>
         <div class="row">
-            <div class="col d-flex justify-content-center">
-                <div class="text me-3">
-                    <span>
-                        la tua password è:
-                    </span>
-                </div>
+            <div class="col d-flex">
+
                 <?php
                 if ($psw_length > 7 && $psw_length < 33) :
-                    echo getPassword($psw_length);
+                    echo "<span>la tua password è: $password</span>";
                 else :
                     echo 'La lunghezza della tua password deve essere dagli 8 ai 32 caratteri';
                 endif;
