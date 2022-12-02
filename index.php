@@ -15,27 +15,7 @@ Dare all’utente anche la possibilità di permettere o meno la ripetizione di c
 
 */
 
-if (isset($_GET['length'])) {
-    $psw_length = $_GET['length'];
-} else {
-    $psw_length = null;
-}
-
-
-function getPassword($length)
-{
-    $chars = 'abcdefghijklmnopqrstuvxwyzABCDEFGHJKLMNOPQRSTUVXWYZ0123456789(!?&%$<>^+-*/()[]{}@#_=))';
-    $psw = '';
-    for ($i = 0; $i < $length; $i++) {
-
-        $randomChar = rand(0, strlen($chars) - 1);
-        $psw .= substr($chars, $randomChar, 1);
-    }
-
-    return $psw;
-}
-
-
+require __DIR__ . '/functions.php';
 ?>
 
 <!DOCTYPE html>
@@ -85,7 +65,7 @@ function getPassword($length)
             </div>
         </div>
         <div class="row">
-            <div class="col d-flex">
+            <div class="col d-flex justify-content-center">
 
                 <?php
                 echo getPassword($psw_length);
