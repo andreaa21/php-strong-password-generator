@@ -15,7 +15,21 @@ Dare all’utente anche la possibilità di permettere o meno la ripetizione di c
 
 */
 
+var_dump($_GET);
+
 require __DIR__ . '/functions.php';
+
+if (!empty($_GET['length'])) {
+    if ($_GET['length'] < 8 || $_GET['length'] > 32) {
+        $output = 'errore!';
+    } else {
+        $password = getPassword($psw_length);
+        session_start();
+        $_SESSION['password'] = $password;
+        header('Location: ./landing.php');
+        var_dump($password);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -54,22 +68,13 @@ require __DIR__ . '/functions.php';
                     </span>
                 </div>
                 <form class="d-flex" action="./index.php" method="GET">
-                    <input type="number" class="form-control" name="length">
+                    <input type="number" class="form-control" name="length" min="8" max="32">
                     <div class="ms-3">
                         <button class="btn btn-primary" type="submit">
                             invia
                         </button>
                     </div>
                 </form>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col d-flex justify-content-center">
-
-                <?php
-                echo getPassword($psw_length);
-                ?>
 
             </div>
         </div>

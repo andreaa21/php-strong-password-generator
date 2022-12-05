@@ -10,6 +10,7 @@ function getPassword($length)
 {
     $chars = 'abcdefghijklmnopqrstuvxwyzABCDEFGHJKLMNOPQRSTUVXWYZ0123456789(!?&%$<>^+-*/()[]{}@#_=))';
     $psw = '';
+
     for ($i = 0; $i < $length; $i++) {
 
         $randomChar = rand(0, strlen($chars) - 1);
